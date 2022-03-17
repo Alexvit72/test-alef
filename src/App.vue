@@ -1,26 +1,41 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <HeaderComp />
+  <main>
+    <router-view />
+  </main>
+  <FooterComp />
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+<script>
+  import HeaderComp from './components/HeaderComp.vue';
+  import FooterComp from './components/FooterComp.vue';
+
+  export default {
+    name: 'App',
+    components: {
+      HeaderComp,
+      FooterComp
+    }
   }
-}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
+<style lang='scss'>
+  @import "./assets/reset";
+  @font-face {
+    font-family: 'Montserrat';
+    src: url(./assets/fonts/Montserrat-Regular.ttf);
+  }
+  #app {
+    position: relative;
+    height: 100vh;
+    a {
+      transition: all 0.2s ease-in-out;
+    }
+    main {
+      width: 45%;
+      margin: auto;
+    }
+  }
 </style>
