@@ -17,7 +17,6 @@
     width: 100%;
     background: #fafafa;
     box-shadow: 0px 1px 0px rgba(17, 17, 17, 0.1);
-    font-family: 'Montserrat';
     font-size: 0.8rem;
     line-height: 1rem;
     text-align: center;

@@ -1,7 +1,11 @@
 <template>
   <div class="my-input">
-    <label for="id">{{ id }}</label>
-    <input type="text" :id="id" :name="id">
+    <label for="id">{{ name }}</label>
+    <input type="text"
+      :id="name"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
+    />
   </div>
 </template>
 
@@ -10,11 +14,15 @@
   export default {
     name: 'MyInput',
     props: {
-      id: {
+      modelValue: {
+        type: String
+      },
+      name: {
         type: String,
         require: true
       }
-    }
+    },
+    emits: ['update:modelValue']
   }
 </script>
 
@@ -24,7 +32,6 @@
     border: 1px solid #f1f1f1;
     border-radius: 4px;
     position: relative;
-    font-family: 'Montserrat';
     label {
       position: absolute;
       left: 1rem;

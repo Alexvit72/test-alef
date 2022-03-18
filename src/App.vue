@@ -27,6 +27,10 @@
     font-family: 'Montserrat';
     src: url(./assets/fonts/Montserrat-Regular.ttf);
   }
+  @font-face {
+    font-family: 'Montserrat-Bold';
+    src: url(./assets/fonts/Montserrat-Bold.ttf);
+  }
   #app {
     position: relative;
     height: 100vh;
@@ -35,7 +39,9 @@
     }
     main {
       width: 45%;
+      max-width: 616px;
       margin: auto;
     }
+    font-family: 'Montserrat';
   }
 </style>

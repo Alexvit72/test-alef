@@ -33,7 +33,6 @@
       right: 0;
       margin: auto;
       a {
-        font-family: 'Montserrat';
         font-size: 0.9rem;
         line-height: 1.5rem;
         color: rgba(17, 17, 17, 0.48);
