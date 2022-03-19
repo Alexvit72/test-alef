@@ -22,6 +22,7 @@
 
 <script>
   import { mapState } from 'vuex';
+  import getValidAgeString from '../utils/getValidAgeString';
 
   export default {
     computed: {
@@ -31,10 +32,10 @@
         'children'
       ]),
       personal() {
-        return this.name ? `${this.name}, ${this.age} лет` : '';
+        return this.name ? `${this.name}, ${this.age} ${getValidAgeString(this.age)}` : '';
       },
       userChildren() {
-        return this.children.length && this.children[0].name ? this.children.map((item) => `${item.name}, ${item.age} лет`) : '';
+        return this.children[0] && this.children[0].name ? this.children.map((item) => `${item.name}, ${item.age} ${getValidAgeString(item.age)}`) : '';
       }
     }
   }

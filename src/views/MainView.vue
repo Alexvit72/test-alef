@@ -1,14 +1,15 @@
 <template>
+  <form @submit.prevent>
     <div class="data-main">
       <div class="title">
         <h2>Персональные данные</h2>
       </div>
       <div class="input-block">
         <div class="input-row">
-          <MyInput name="Имя" v-model="userName" />
+          <MyInput id="userName" name="Имя" v-model="userName" />
         </div>
         <div class="input-row">
-          <MyInput name="Возраст" v-model="userAge" />
+          <MyInput id="userAge" name="Возраст" v-model="userAge" />
         </div>
       </div>
     </div>
@@ -16,18 +17,19 @@
       <div class="title">
         <h2>Дети (макс. 5)</h2>
         <ButtonComp v-if="userChildren.length < 5" :onclick="addChild">
-          <img :src="plus" /> Добавить ребёнка
+          <img src="../assets/images/plus.svg" /> <span class="add">Добавить ребёнка</span>
         </ButtonComp>
       </div>
       <div class="input-block">
         <div class="input-row" v-for="child in userChildren" :key="child.id">
-          <MyInput name="Имя" v-model="child.name" />
-          <MyInput name="Возраст" v-model="child.age" />
+          <MyInput id="childName" name="Имя" v-model="child.name" />
+          <MyInput id="childAge" name="Возраст" v-model="child.age" />
           <span class="delete" @click="removeChaild(child)">Удалить</span>
         </div>
       </div>
     </div>
-  <ButtonComp className="blue" :onClick="submit">
+  </form>
+  <ButtonComp className="blue" :onClick="submit" :extra="extra">
     Сохранить
   </ButtonComp>
 </template>
@@ -36,8 +38,8 @@
 <script>
   import MyInput from '../components/MyInput.vue';
   import ButtonComp from '../components/ButtonComp.vue';
-  import plus from '../assets/plus.svg';
   import { mapActions } from 'vuex';
+  import validateForm from '../utils/validateForm';
 
   export default {
     components: {
@@ -49,21 +51,26 @@
         userChildren: [],
         userName: '',
         userAge: '',
-        plus: plus,
-        newId: 1
+        extra: ''
       }
     },
     methods: {
       addChild() {
-        this.userChildren.push({id: this.newId++, name: '', age: ''});
+        this.userChildren.push({name: '', age: ''});
       },
       removeChaild(child) {
         this.userChildren.splice(this.userChildren.indexOf(child), 1);
       },
       submit() {
-        this.setName(this.userName);
-        this.setAge(this.userAge);
-        this.setChildren(this.userChildren);
+        if (validateForm(document.forms[0])) {
+          this.setName(this.userName);
+          this.setAge(this.userAge);
+          this.setChildren(this.userChildren);
+          this.extra = 'Сохранено!';
+          setTimeout(() => {
+            this.extra = '';
+          }, 1000);
+        }
       },
       ...mapActions(['setName', 'setAge', 'setChildren']),
     },
@@ -87,12 +94,13 @@
     margin-top: 2.2rem;
     .input-row {
       display: flex;
-      align-items: center;
+      margin-bottom: 7px !important;
       .my-input {
         flex-grow: 1;
         margin-right: 1.125rem;
       }
       .delete {
+        margin-top: 1rem;
         font-size: 0.9rem;
         line-height: 1.5rem;
         color: #01a7fd;
@@ -100,6 +108,17 @@
         transition: all 0.2s ease-in-out;
         &:hover {
           color: #0f79af;
+        }
+      }
+      @media screen and (max-width: 900px) {
+        flex-direction: column;
+        margin-bottom: 1.5rem !important;
+        .my-input {
+          margin-right: 0;
+          margin-bottom: 10px;
+        }
+        .delete {
+          margin-top: 0;
         }
       }
     }
@@ -110,6 +129,11 @@
     align-items: center;
     height: 44px;
     margin-bottom: 11px;
+    @media screen and (max-width: 900px) {
+      .add {
+        display: none;
+      }
+    }
     h2 {
       font-weight: 600;
       font-size: 1rem;

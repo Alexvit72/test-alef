@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <img class="logo" alt="Vue logo" src="../assets/Logo_imi_horizontal.png">
+    <img class="logo" alt="Vue logo" src="../assets/images/logo.svg">
     <nav class="nav">
       <router-link class="left" to="/">Форма</router-link>
       <router-link to="/preview">Превью</router-link>
@@ -16,11 +16,17 @@
 
 <style lang='scss'>
   .header {
-    position: relative;
+    position: fixed;
+    width: 100%;
     padding: 1.4rem;
+    background: #fff;
     box-shadow: 0px 1px 0px rgba(17, 17, 17, 0.1);
+    z-index: 100;
     .logo {
-      margin-left: 3.2rem;
+      margin-left: 5.8rem;
+      @media screen and (max-width: 900px) {
+        margin-left: 5%;
+      }
     }
     .nav {
       position: absolute;
@@ -32,6 +38,10 @@
       left: 0;
       right: 0;
       margin: auto;
+      @media screen and (max-width: 900px) {
+        left: unset;
+        right: 5%;
+      }
       a {
         font-size: 0.9rem;
         line-height: 1.5rem;

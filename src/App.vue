@@ -32,7 +32,6 @@
     src: url(./assets/fonts/Montserrat-Bold.ttf);
   }
   #app {
-    position: relative;
     height: 100vh;
     a {
       transition: all 0.2s ease-in-out;
@@ -41,6 +40,10 @@
       width: 45%;
       max-width: 616px;
       margin: auto;
+      padding: 80px 0 100px;
+      @media screen and (max-width: 900px) {
+        width: 90%;
+      }
     }
     font-family: 'Montserrat';
   }
